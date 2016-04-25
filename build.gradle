@@ -3,9 +3,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'application'
 
-    //sourceCompatibility  = 1.6
     group = 'pl.morecraft.dev.morepianer'
-    version = '0.1-SNAPSHOT'
 
     repositories {
         mavenLocal()
@@ -26,6 +24,7 @@ subprojects {
 
 }
 
-
-
-
+task copyJars(type: Copy, dependsOn: subprojects.jar) {
+    from(subprojects.jar)
+    into project.file('/jars')
+}
