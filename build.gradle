@@ -1,0 +1,31 @@
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    //sourceCompatibility  = 1.6
+    group = 'pl.morecraft.dev.morepianer'
+    version = '0.1-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    run {
+        main = project.getProperty('mainClassName')
+    }
+
+    jar {
+        manifest {
+            attributes 'Implementation-Title': project.getProperty('name'),
+                    'Implementation-Version': project.getProperty('version'),
+                    'Main-Class': project.getProperty('mainClassName')
+        }
+    }
+
+}
+
+
+
+
