@@ -14,12 +14,21 @@ subprojects {
         main = project.getProperty('mainClassName')
     }
 
+    startScripts {
+        mainClassName = project.getProperty('mainClassName')
+    }
+
     jar {
         manifest {
             attributes 'Implementation-Title': project.getProperty('name'),
                     'Implementation-Version': project.getProperty('version'),
                     'Main-Class': project.getProperty('mainClassName')
         }
+    }
+
+    dependencies {
+        compile 'com.google.dagger:dagger:2.4'
+        compile 'com.google.dagger:dagger-compiler:2.4'
     }
 
 }
