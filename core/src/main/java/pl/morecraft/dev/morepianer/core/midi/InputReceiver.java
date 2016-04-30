@@ -1,7 +1,7 @@
 package pl.morecraft.dev.morepianer.core.midi;
 
-import pl.morecraft.dev.morepianer.core.Note;
-import pl.morecraft.dev.morepianer.core.NoteFormat;
+import pl.morecraft.dev.morepianer.core.model.Note;
+import pl.morecraft.dev.morepianer.core.model.NoteFormat;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;

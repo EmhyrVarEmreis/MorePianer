@@ -1,4 +1,4 @@
-package pl.morecraft.dev.morepianer.core;
+package pl.morecraft.dev.morepianer.core.model;
 
 public enum Octave {
 
