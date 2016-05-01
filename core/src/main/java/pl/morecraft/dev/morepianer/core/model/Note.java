@@ -86,7 +86,7 @@ public class Note {
 
         if (octave != note.octave) return false;
         /** N O T E !
-         * GIS is the same note as GES
+         * FIS is the same note as GES
          */
         return tone.isEqual(note.tone);
 
@@ -96,7 +96,7 @@ public class Note {
     public int hashCode() {
         int result = octave != null ? octave.hashCode() : 0;
         /** N O T E !
-         * GIS is the same note as GES
+         * FIS is the same note as GES
          */
         result = 31 * result + (tone != null ? tone.getNumber() * 47 : 0);
         return result;

@@ -77,7 +77,7 @@ public enum Tone {
     }
 
     /**
-     * Checks if two Tones are exact. NOTE: GIS is the same tone as GES
+     * Checks if two Tones are exact. NOTE: FIS is the same tone as GES
      *
      * @param o java.lang.Object to compare to
      * @return TRUE if tone is equal to provided java.lang.Object
