@@ -1,5 +1,9 @@
 package pl.morecraft.dev.morepianer.core.model;
 
+import pl.morecraft.dev.morepianer.core.model.dict.NoteFormat;
+import pl.morecraft.dev.morepianer.core.model.dict.Octave;
+import pl.morecraft.dev.morepianer.core.model.dict.Tone;
+
 public class Note {
 
     private Octave octave;
@@ -86,7 +90,7 @@ public class Note {
 
         if (octave != note.octave) return false;
         /** N O T E !
-         * FIS is the same note as GES
+         * F_SHARP is the same note as G_FLAT
          */
         return tone.isEqual(note.tone);
 
@@ -96,7 +100,7 @@ public class Note {
     public int hashCode() {
         int result = octave != null ? octave.hashCode() : 0;
         /** N O T E !
-         * FIS is the same note as GES
+         * F_SHARP is the same note as G_FLAT
          */
         result = 31 * result + (tone != null ? tone.getNumber() * 47 : 0);
         return result;

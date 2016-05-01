@@ -1,27 +1,31 @@
-package pl.morecraft.dev.morepianer.core.model;
+package pl.morecraft.dev.morepianer.core.model.dict;
 
-import static pl.morecraft.dev.morepianer.core.model.Sign.Sharp;
-import static pl.morecraft.dev.morepianer.core.model.Sign.Flat;
+import static pl.morecraft.dev.morepianer.core.model.dict.Sign.Flat;
+import static pl.morecraft.dev.morepianer.core.model.dict.Sign.Sharp;
 
 public enum Tone {
 
+    B_SHARP(1, Sharp),
     C(1, null),
-    CIS(2, Sharp),
-    DES(2, Flat),
+    C_SHARP(2, Sharp),
+    D_FLAT(2, Flat),
     D(3, null),
-    DIS(4, Sharp),
-    ES(4, Flat),
+    D_SHARP(4, Sharp),
+    E_FLAT(4, Flat),
     E(5, null),
+    F_FLAT(5, Flat),
+    E_SHARP(6, Sharp),
     F(6, null),
-    FIS(7, Sharp),
-    GES(7, Flat),
+    F_SHARP(7, Sharp),
+    G_FLAT(7, Flat),
     G(8, null),
-    GIS(9, Sharp),
-    AS(9, Flat),
+    G_SHARP(9, Sharp),
+    A_FLAT(9, Flat),
     A(10, null),
-    AIS(11, Sharp),
-    B(11, Flat),
-    H(12, null);
+    A_SHARP(11, Sharp),
+    B_FLAT(11, Flat),
+    B(12, null),
+    C_FLAT(12, Flat);
 
     private int number;
     private Sign sign;
@@ -77,7 +81,7 @@ public enum Tone {
     }
 
     /**
-     * Checks if two Tones are exact. NOTE: FIS is the same tone as GES
+     * Checks if two Tones are exact. NOTE: F_SHARP is the same tone as G_FLAT
      *
      * @param o java.lang.Object to compare to
      * @return TRUE if tone is equal to provided java.lang.Object

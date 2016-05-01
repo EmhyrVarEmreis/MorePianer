@@ -1,4 +1,4 @@
-package pl.morecraft.dev.morepianer.core.model;
+package pl.morecraft.dev.morepianer.core.model.dict;
 
 public enum NoteFormat {
 
