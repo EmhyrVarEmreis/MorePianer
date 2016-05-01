@@ -88,7 +88,7 @@ public class Note {
         /** N O T E !
          * GIS is the same note as GES
          */
-        return tone.getNumber() == note.tone.getNumber();
+        return tone.isEqual(note.tone);
 
     }
 
