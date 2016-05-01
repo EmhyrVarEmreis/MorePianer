@@ -76,4 +76,14 @@ public enum Tone {
         return null;
     }
 
+    /**
+     * Checks if two Tones are exact. NOTE: GIS is the same tone as GES
+     *
+     * @param o java.lang.Object to compare to
+     * @return TRUE if tone is equal to provided java.lang.Object
+     */
+    public boolean isEqual(Object o) {
+        return o instanceof Tone && Integer.valueOf(number).equals(((Tone) o).getNumber());
+    }
+
 }
