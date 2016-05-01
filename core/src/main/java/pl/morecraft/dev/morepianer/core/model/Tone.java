@@ -1,35 +1,38 @@
 package pl.morecraft.dev.morepianer.core.model;
 
+import static pl.morecraft.dev.morepianer.core.model.Sign.Sharp;
+import static pl.morecraft.dev.morepianer.core.model.Sign.Flat;
+
 public enum Tone {
 
-    C(1, false),
-    CIS(2, true),
-    DES(2, true),
-    D(3, false),
-    DIS(4, true),
-    ES(4, true),
-    E(5, false),
-    F(6, false),
-    FIS(7, true),
-    GES(7, true),
-    G(8, false),
-    GIS(9, true),
-    AS(9, true),
-    A(10, false),
-    AIS(11, true),
-    B(11, true),
-    H(12, false);
+    C(1, null),
+    CIS(2, Sharp),
+    DES(2, Flat),
+    D(3, null),
+    DIS(4, Sharp),
+    ES(4, Flat),
+    E(5, null),
+    F(6, null),
+    FIS(7, Sharp),
+    GES(7, Flat),
+    G(8, null),
+    GIS(9, Sharp),
+    AS(9, Flat),
+    A(10, null),
+    AIS(11, Sharp),
+    B(11, Flat),
+    H(12, null);
 
     private int number;
-    private boolean isAccidental;
+    private Sign sign;
 
     public static int RANGE_MIN = 1;
     public static int RANGE_MAX = 12;
     public static int RANGE = 12;
 
-    Tone(int number, boolean isAccidental) {
+    Tone(int number, Sign sign) {
         this.number = number;
-        this.isAccidental = isAccidental;
+        this.sign = sign;
     }
 
     public int getNumber() {
@@ -40,12 +43,16 @@ public enum Tone {
         this.number = number;
     }
 
-    public boolean isAccidental() {
-        return isAccidental;
+    public Sign getSign() {
+        return sign;
     }
 
-    public void setAccidental(boolean accidental) {
-        isAccidental = accidental;
+    public void setSign(Sign sign) {
+        this.sign = sign;
+    }
+
+    public boolean isAccidental() {
+        return sign != null;
     }
 
     public static Tone valueOf(int number) {
