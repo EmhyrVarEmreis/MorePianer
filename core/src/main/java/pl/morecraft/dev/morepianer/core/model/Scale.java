@@ -25,7 +25,7 @@ public abstract class Scale {
         return getScaleInfo().NAME_DE();
     }
 
-    public ScaleTypeByIntervals getTypeByInvervals() {
+    public ScaleTypeByIntervals getTypeByIntervals() {
         return getScaleInfo().SCALE_TYPE_BY_INTERVALS();
     }
 
