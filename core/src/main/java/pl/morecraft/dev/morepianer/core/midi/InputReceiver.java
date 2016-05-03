@@ -1,5 +1,8 @@
 package pl.morecraft.dev.morepianer.core.midi;
 
+import pl.morecraft.dev.morepianer.core.model.Note;
+import pl.morecraft.dev.morepianer.core.model.dict.NoteFormat;
+
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
@@ -23,16 +26,21 @@ public class InputReceiver implements Receiver {
             int nData2 = shortMessage.getData2();
 
             //System.out.println(shortMessageToString(shortMessage));
+            try {
 
-            switch (nCommand) {
-                case ShortMessage.NOTE_ON:
-                    System.out.println("NOTE_ON " + toHex(nData1) + " " + toHex(nData2));
-                    break;
-                case ShortMessage.NOTE_OFF:
-                    System.out.println("NOTE_OFF " + toHex(nData1) + " " + toHex(nData2));
-                    break;
-                default:
-                    break;
+                switch (nCommand) {
+                    case ShortMessage.NOTE_ON:
+                        //System.out.println("NOTE_ON " + toHex(nData1) + " " + toHex(nData2));
+                        System.out.println("NOTE_ON " + Note.getNoteFromMidiNumber(nData1).toString(NoteFormat.GERMAN));
+                        break;
+                    case ShortMessage.NOTE_OFF:
+                        System.out.println("NOTE_OFF " + toHex(nData1) + " " + toHex(nData2));
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         } else {
