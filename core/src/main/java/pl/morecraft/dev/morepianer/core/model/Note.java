@@ -55,6 +55,11 @@ public class Note {
         return new Note(Octave.valueOf(octaveNumber), Tone.valueOf(toneNumber));
     }
 
+    @Override
+    public String toString() {
+        return toString(NoteFormat.GERMAN);
+    }
+
     public String toString(NoteFormat format) {
         switch (format) {
             case GERMAN:
