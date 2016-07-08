@@ -13,7 +13,6 @@ public class Core {
 
         Thread thread = new PressedKeysTest(handler);
         thread.start();
-
     }
 
     static class PressedKeysTest extends Thread {
@@ -27,7 +26,7 @@ public class Core {
         @Override
         public void run() {
             while (!this.isInterrupted()) {
-                System.out.println(
+                System.out.println(handler.getAllPressedNotes().size() + " " +
                         handler.getAllPressedNotes().stream().map(
                                 note -> note.toString(NoteFormat.GERMAN)
                         ).collect(Collectors.joining(", "))

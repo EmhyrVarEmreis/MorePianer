@@ -31,7 +31,6 @@ public class InputReceiver implements Receiver {
             Note note = Note.getNoteFromMidiNumber(nData1);
 
             try {
-
                 switch (nCommand) {
                     case ShortMessage.NOTE_ON:
                         log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "NOTE_ON", note);
@@ -39,6 +38,10 @@ public class InputReceiver implements Receiver {
                         break;
                     case ShortMessage.NOTE_OFF:
                         log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "NOTE_OFF", note);
+                        device.releaseNote(note);
+                        break;
+                    case ShortMessage.CONTROL_CHANGE:
+                        log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "CONTROL_CHANGE", nData1, nData2);
                         device.releaseNote(note);
                         break;
                     default:
