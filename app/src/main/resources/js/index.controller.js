@@ -11,10 +11,11 @@ app.controller('JavaFXWebDemoController', function($scope) {
     $scope.update = function() {
         $scope.fruits = ["loading..."];
 
-        // fruitsService.loadFruits(function(data) {
-        //     $scope.fruits = data;
-        //     $scope.$apply();
-        // });
+    };
+
+    $scope.exit = function() {
+        //noinspection JSUnresolvedVariable
+        systemService.exit();
     };
 
     // calculator
@@ -22,9 +23,8 @@ app.controller('JavaFXWebDemoController', function($scope) {
     $scope.number2 = 2;
 
     $scope.sum = function() {
-        return 2;
-        //return calculatorService.sum($scope.number1, $scope.number2);
-    }
+        return $scope.number1 + $scope.number2;
+    };
 
 });
 

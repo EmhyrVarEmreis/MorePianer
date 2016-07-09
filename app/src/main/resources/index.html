@@ -22,15 +22,14 @@
 
     <script src="js/misc.js"></script>
 
-    <script src="js/controller-angular.js" type="text/javascript"></script>
+    <script src="js/index.controller.js" type="text/javascript"></script>
 
     <!--&lt;!&ndash; before any uses of the backend objects &ndash;&gt;-->
-    <!--<script src="js/fruits-service.js" type="text/javascript"></script>-->
-    <!--<script src="js/calculator-service.js" type="text/javascript"></script>-->
+    <script src="js/java.service.js" type="text/javascript"></script>
 
     <!--<script src="jslib/angular.min.js" type="text/javascript"></script>-->
 
-    <!--<script src="js/controller-angular.js" type="text/javascript"></script>-->
+    <!--<script src="js/index.controller.js" type="text/javascript"></script>-->
     <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
     <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
 
@@ -91,7 +90,7 @@
                         <li><a href="javascript:void(0)">Website</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0)">Exit</a></li>
+                <li><a href="javascript:void(0)" ng-click="exit()">Exit</a></li>
             </ul>
         </div>
     </div>

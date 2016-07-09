@@ -1,16 +1,42 @@
 package pl.morecraft.dev.morepianer.app;
 
 import javafx.application.Application;
-import pl.morecraft.dev.morepianer.app.webview.MainApplication;
+import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import pl.morecraft.dev.morepianer.app.waiter.WaiterControl;
+import pl.morecraft.dev.morepianer.app.waiter.WaiterDialog;
+import pl.morecraft.dev.morepianer.app.webview.PrimaryStageProducer;
 
-public class DesktopApplication {
+@SpringBootApplication
+public class DesktopApplication extends Application {
 
     public static void main(String[] args) {
-        System.setProperty("prism.lcdtext", "false"); // enhance fonts
 
-        MainApplication app = new MainApplication();
+        System.setProperty("prism.lcdtext", "false");
 
-        Application.launch(app.getClass(), args);
+        new WaiterDialog();
+
+        Application.launch(args);
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        //ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"beanx.xml"});
+        ConfigurableApplicationContext context = SpringApplication.run(DesktopApplication.class);
+
+        //new ConfigurationWriter(context, "beans.xml");
+
+        PrimaryStageProducer app = context.getBean(PrimaryStageProducer.class);
+
+        primaryStage = app.apply(primaryStage);
+
+        primaryStage.show();
+        WaiterControl.closeWaiter();
+
     }
 
 }

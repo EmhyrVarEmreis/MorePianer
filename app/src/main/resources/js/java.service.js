@@ -1,6 +1,6 @@
-// Force java to connect the fruitsService object
+// Force java to connect the fooBarService object
 // This is the only way I found to connect the java
 // object before any subsequent javascript files are executed,
 // such as angular controllers. This sentence must be called
-// before any other script which will use fruitsService
-alert("__CONNECT__BACKEND__fruitsService");
+// before any other script which will use calculatorService
+alert("__CONNECT__BACKEND__systemService");

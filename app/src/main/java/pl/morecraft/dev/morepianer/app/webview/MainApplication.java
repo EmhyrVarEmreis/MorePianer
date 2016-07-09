@@ -10,11 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.morecraft.dev.morepianer.app.webview.backend.CalculatorService;
 import pl.morecraft.dev.morepianer.app.webview.backend.FruitsService;
 
 import static pl.morecraft.dev.morepianer.app.javafx.webview.Java2JavascriptUtils.connectBackendObject;
 
+@Service
 public class MainApplication extends Application {
 
     private static final String PAGE = "/index.html";
@@ -22,6 +25,7 @@ public class MainApplication extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    @Autowired
     private WebView webView;
 
     @Override

@@ -15,8 +15,7 @@ public class FruitsService {
     public void loadFruits(final Object callbackfunction) {
 
         // a database...
-        final List<String> fruits = asList(
-                new String[]{"orange", "apple", "banana", "strawberry"});
+        final List<String> fruits = asList("orange", "apple", "banana", "strawberry");
 
         // launch a background thread (async)
         new Thread(() -> {
