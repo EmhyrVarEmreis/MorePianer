@@ -60,12 +60,18 @@ public enum Tone {
     }
 
     public static Tone valueOf(int number) {
+        Tone tmp = null;
         for (Tone tone : Tone.values()) {
             if (tone.getNumber() == number) {
-                return tone;
+                if (tmp == null) {
+                    tmp = tone;
+                }
+                if (tone.getSign() == null) {
+                    return tone;
+                }
             }
         }
-        return null;
+        return tmp;
     }
 
     public static Tone valueOf(int number, int previousNumber) {

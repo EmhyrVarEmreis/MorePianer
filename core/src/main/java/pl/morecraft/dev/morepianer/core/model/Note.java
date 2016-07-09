@@ -55,6 +55,11 @@ public class Note {
         return new Note(Octave.valueOf(octaveNumber), Tone.valueOf(toneNumber));
     }
 
+    @Override
+    public String toString() {
+        return toString(NoteFormat.GERMAN);
+    }
+
     public String toString(NoteFormat format) {
         switch (format) {
             case GERMAN:
@@ -83,12 +88,18 @@ public class Note {
     @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Note note = (Note) o;
 
-        if (octave != note.octave) return false;
+        if (octave != note.octave) {
+            return false;
+        }
         /** N O T E !
          * F_SHARP is the same note as G_FLAT
          */

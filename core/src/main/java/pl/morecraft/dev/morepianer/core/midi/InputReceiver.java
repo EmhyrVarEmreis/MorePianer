@@ -1,7 +1,8 @@
 package pl.morecraft.dev.morepianer.core.midi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.morecraft.dev.morepianer.core.model.Note;
-import pl.morecraft.dev.morepianer.core.model.dict.NoteFormat;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
@@ -9,32 +10,39 @@ import javax.sound.midi.ShortMessage;
 
 public class InputReceiver implements Receiver {
 
-    private String name;
+    public static final Logger log = LoggerFactory.getLogger(InputReceiver.class);
 
-    public InputReceiver(String name) {
-        this.name = name;
+    private Device device;
+
+    public InputReceiver(Device device) {
+        this.device = device;
     }
 
     @Override
     public void send(MidiMessage message, long timeStamp) {
-        //System.out.println(name);
         if (message instanceof ShortMessage) {
             ShortMessage shortMessage = (ShortMessage) message;
+
             int nChannel = shortMessage.getChannel();
             int nCommand = shortMessage.getCommand();
             int nData1 = shortMessage.getData1();
             int nData2 = shortMessage.getData2();
 
-            //System.out.println(shortMessageToString(shortMessage));
-            try {
+            Note note = Note.getNoteFromMidiNumber(nData1);
 
+            try {
                 switch (nCommand) {
                     case ShortMessage.NOTE_ON:
-                        //System.out.println("NOTE_ON " + toHex(nData1) + " " + toHex(nData2));
-                        System.out.println("NOTE_ON " + Note.getNoteFromMidiNumber(nData1).toString(NoteFormat.GERMAN));
+                        log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "NOTE_ON", note);
+                        device.switchNote(note);
                         break;
                     case ShortMessage.NOTE_OFF:
-                        System.out.println("NOTE_OFF " + toHex(nData1) + " " + toHex(nData2));
+                        log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "NOTE_OFF", note);
+                        device.releaseNote(note);
+                        break;
+                    case ShortMessage.CONTROL_CHANGE:
+                        log.debug("Received ShortMessage [{}] from [{}]: [{}]: [{}]: [{}]", shortMessageToString(shortMessage), device.getDeviceInfo().getName(), "CONTROL_CHANGE", nData1, nData2);
+                        device.releaseNote(note);
                         break;
                     default:
                         break;
@@ -44,9 +52,8 @@ public class InputReceiver implements Receiver {
             }
 
         } else {
-            System.out.println("LongMessage");
+            log.debug("Received MidiMessage from [{}]", device.getDeviceInfo().getName());
         }
-        //System.out.println();
     }
 
     @Override
