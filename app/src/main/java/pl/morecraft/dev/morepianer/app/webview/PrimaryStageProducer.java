@@ -64,9 +64,8 @@ public class PrimaryStageProducer implements Function<Stage, Stage> {
         borderPane.setTop(toolBar);
         borderPane.setCenter(webView);
 
-
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(new Scene(borderPane, 800, 600));
+        stage.setScene(new Scene(borderPane, 1024, 768));
         stage.setTitle("MorePianer");
 
         ResizeHelper.addResizeListener(stage);
