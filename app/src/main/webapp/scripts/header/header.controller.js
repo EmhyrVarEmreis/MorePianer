@@ -1,12 +1,12 @@
 (function() {
     'use strict';
 
-    angular.module('morepianer').controller('NavController',
+    angular.module('morepianer').controller('HeaderController',
 
         function($scope) {
 
             $scope.exit = function() {
-                console.log("EXIT");
+                systemService.exit();
             };
 
         });

@@ -1,0 +1,6 @@
+{
+  "ignoredDependencies": [
+    "bootstrap-sass",
+    "bootstrap-sass-official"
+  ]
+}

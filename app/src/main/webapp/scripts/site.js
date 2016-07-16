@@ -5,10 +5,15 @@
         $stateProvider.state("site", {
             abstract: true,
             views:    {
-                'nav@': {
-                    templateUrl:  'scripts/nav/nav.html',
-                    controller:   'NavController',
-                    controllerAs: 'nav'
+                'header@': {
+                    templateUrl:  'scripts/header/header.html',
+                    controller:   'HeaderController',
+                    controllerAs: 'header'
+                },
+                'footer@': {
+                    templateUrl:  'scripts/footer/footer.html',
+                    controller:   'FooterController',
+                    controllerAs: 'footer'
                 }
             }
         });

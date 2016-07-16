@@ -1,5 +1,4 @@
 $.material.init();
-$("#dropdown-menu select").dropdown();
 
 (function() {
     'use strict';

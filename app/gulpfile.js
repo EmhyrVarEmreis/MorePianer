@@ -3,6 +3,7 @@
 'use strict';
 
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     debug = require('gulp-debug'),
     inject = require('gulp-inject'),
     gulpif = require('gulp-if'),
@@ -14,14 +15,14 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
-    rev = require('gulp-rev'),
-    revReplace = require('gulp-rev-replace'),
     clean = require('gulp-clean'),
+    replace = require('gulp-replace'),
     wiredep = require('wiredep').stream;
 
 var config = {
-    app:          'src/main/webapp/',
-    bootstrapDir: 'bower_components/bootstrap',
+    app:              'src/main/webapp/',
+    bootstrapDir:     'bower_components/bootstrap',
+    materialFontsDir: 'bower_components/material-design-icons',
 
     work: 'target/work/',
     dist: 'target/classes/',
@@ -35,6 +36,7 @@ gulp.task('clean', function() {
         [config.dist + 'fonts',
             config.dist + 'scripts',
             config.dist + 'styles',
+            config.dist + 'img',
             config.dist + 'index.html',
             config.work],
         {read: false})
@@ -42,13 +44,39 @@ gulp.task('clean', function() {
 });
 
 gulp.task('copy', function() {
-    return gulp.src(config.app + 'i18n/**')
-        .pipe(gulp.dest(config.dist + 'i18n/'));
+    return gulp.src(config.app + '/i18n/**')
+        .pipe(gulp.dest(config.dist + '/i18n/'));
 });
 
 gulp.task('copy-fonts', function() {
     return gulp.src(config.bootstrapDir + '/fonts/**/*')
         .pipe(gulp.dest(config.dist + '/fonts'));
+});
+//
+// gulp.task('copy-material-fonts', function() {
+//     return gulp.src([
+//         config.materialFontsDir + '/iconfont/*.eot',
+//         config.materialFontsDir + '/iconfont/*.ttf',
+//         config.materialFontsDir + '/iconfont/*.woff',
+//         config.materialFontsDir + '/iconfont/*.woff2'
+//     ]).pipe(gulp.dest(config.dist + '/fonts'));
+// });
+
+gulp.task('copy-images', function() {
+    return gulp.src(config.app + '/img/**/*')
+        .pipe(gulp.dest(config.dist + '/img'));
+});
+
+gulp.task('dev-enable', function() {
+    return gulp.src(config.app + '/scripts/backend/const.js')
+        .pipe(replace('CONST_DEV = false', 'CONST_DEV = true'))
+        .pipe(gulp.dest(config.app + '/scripts/backend'));
+});
+
+gulp.task('dev-disable', function() {
+    return gulp.src(config.app + '/scripts/backend/const.js')
+        .pipe(replace('CONST_DEV = true', 'CONST_DEV = false'))
+        .pipe(gulp.dest(config.app + '/scripts/backend'));
 });
 
 gulp.task('preprocess', function() {
@@ -67,7 +95,15 @@ gulp.task('preprocess', function() {
     return gulp.src([config.app + '**/*.html', '!' + config.app + 'scripts/**/*.html'])
         .pipe(inject(injectScripts, injectOptions))
         .pipe(inject(injectStyles, injectOptions))
-        .pipe(wiredep())
+        .pipe(wiredep({
+            onError: function(err) {
+                if (err.toString().indexOf('bootstrap-sass is not installed') > 0) {
+                    gutil.log('Ignoring error with \'bootstrap-sass is not installed\' in wiredep');
+                } else {
+                    gutil.log(err);
+                }
+            }
+        }))
         .pipe(gulp.dest(config.work))
         .pipe(browserSync.reload({stream: true}));
 });
@@ -86,7 +122,7 @@ gulp.task('templates', function() {
         .pipe(gulp.dest(config.work));
 });
 
-gulp.task('html', ['copy', 'copy-fonts', 'templates', 'preprocess'], function() {
+gulp.task('html', ['copy', 'copy-fonts', 'copy-images', 'templates', 'preprocess'], function() {
 
     var templatesInjectFile = gulp.src(config.work + 'templates.js', {read: true});
     var templatesInjectOptions = {
@@ -99,18 +135,16 @@ gulp.task('html', ['copy', 'copy-fonts', 'templates', 'preprocess'], function() 
         .pipe(gulpif('*.js', ngAnnotate()))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss({compatibility: 'ie7'})))
-        //.pipe(rev())
         .pipe(useref({
             searchPath: [config.work, config.app]
         }))
-        .pipe(revReplace())
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('build', ['html'], function() {
+gulp.task('build', ['dev-disable', 'html'], function() {
 });
 
-gulp.task('serve', ['preprocess'], function() {
+gulp.task('serve', ['dev-enable', 'preprocess'], function() {
 
     gulp.watch([config.app + '**/*.html', config.app + '**/*.js', 'bower.json'], ['preprocess']);
     gulp.watch([config.app + '**/*.css'], function(event) {

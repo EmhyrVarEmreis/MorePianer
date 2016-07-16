@@ -1,0 +1,39 @@
+.custom-icon-48 {
+    width: 48px;
+    height: 48px;
+}
+
+.icon-computer-48 {
+    background: url('../img/ic_computer_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-board-48 {
+    background: url('../img/ic_developer_board_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-info-48 {
+    background: url('../img/ic_info_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-memory-48 {
+    background: url('../img/ic_memory_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-person-48 {
+    background: url('../img/ic_person_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-public-48 {
+    background: url('../img/ic_public_white_48dp_1x.png') no-repeat center;
+    background-size: 48px 48px;
+}
+
+.icon-gray {
+    -webkit-filter: brightness(0.6);
+    filter: brightness(0.6);
+}

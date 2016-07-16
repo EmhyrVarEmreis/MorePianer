@@ -115,7 +115,7 @@ public class Java2JavascriptUtils {
 
     private final static class AlertEventHandlerWrapper implements EventHandler<WebEvent<String>> {
 
-        private static final String CONNECT_BACKEND_MAGIC_WORD = "__CONNECT__BACKEND__";
+        private static final String CONNECT_BACKEND_MAGIC_WORD = "__BACKEND__";
         private final EventHandler<WebEvent<String>> wrappedHandler;
         private WebEngine engine;
 
